@@ -8,7 +8,7 @@
     <style>
         :root {
             --gold: #FFD700; --silver: #C0C0C0; --bronze: #CD7F32;
-            --green: #00C853; --orange: #FF9800;
+            --green: #00C853; --orange: #FF9800; --purple: #9C27B0;
             --bg-dark: #0a1628; --bg-card: #1a2744;
             --text-light: #fff; --text-muted: #8899aa;
         }
@@ -28,78 +28,88 @@
         }
         .header p { color: var(--text-muted); margin-top: 5px; }
         
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
-        .stat {
-            background: var(--bg-card); border-radius: 12px;
-            padding: 15px; text-align: center;
-        }
-        .stat .num { font-size: 1.6rem; font-weight: 800; }
+        .section-title { font-size: 1rem; font-weight: 700; margin: 20px 0 10px; display: flex; align-items: center; gap: 8px; }
+        
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 15px 0; }
+        .stat { background: var(--bg-card); border-radius: 10px; padding: 12px; text-align: center; }
+        .stat .num { font-size: 1.4rem; font-weight: 800; }
         .stat .num.orange { color: var(--orange); }
         .stat .num.green { color: var(--green); }
-        .stat .lbl { color: var(--text-muted); font-size: 0.75rem; margin-top: 2px; }
+        .stat .num.purple { color: var(--purple); }
+        .stat .lbl { color: var(--text-muted); font-size: 0.7rem; margin-top: 2px; }
+        
+        .ref-box {
+            background: linear-gradient(135deg, rgba(156,39,176,0.2), rgba(156,39,176,0.1));
+            border: 1px solid var(--purple); border-radius: 12px;
+            padding: 15px; margin: 15px 0;
+        }
+        .ref-box h3 { color: var(--purple); font-size: 0.9rem; margin-bottom: 10px; }
+        .ref-stats { display: flex; gap: 20px; }
+        .ref-stat { text-align: center; }
+        .ref-stat .n { font-size: 1.5rem; font-weight: 800; }
+        .ref-stat .n.s { color: var(--orange); }
+        .ref-stat .n.g { color: var(--green); }
+        .ref-stat .l { font-size: 0.7rem; color: var(--text-muted); }
         
         .filters { display: flex; gap: 8px; margin: 15px 0; flex-wrap: wrap; justify-content: center; }
         .fbtn {
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            color: var(--text-light); padding: 8px 16px; border-radius: 20px;
-            cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.85rem;
+            color: var(--text-light); padding: 8px 14px; border-radius: 20px;
+            cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.8rem;
         }
         .fbtn:hover { background: rgba(0,200,83,0.2); }
         .fbtn.active { background: var(--green); color: #000; border-color: var(--green); }
         
-        .chart { background: var(--bg-card); border-radius: 14px; padding: 18px; margin: 15px 0; }
-        .chart h3 { margin-bottom: 12px; font-size: 0.95rem; }
-        .bars { display: flex; align-items: flex-end; gap: 10px; height: 140px; }
-        .bar-group { flex: 1; display: flex; gap: 4px; align-items: flex-end; position: relative; }
-        .bar { width: 18px; border-radius: 4px 4px 0 0; cursor: pointer; transition: opacity 0.3s; }
-        .bar:hover { opacity: 0.7; }
+        .chart { background: var(--bg-card); border-radius: 12px; padding: 15px; margin: 15px 0; }
+        .chart h3 { margin-bottom: 10px; font-size: 0.9rem; }
+        .bars { display: flex; align-items: flex-end; gap: 8px; height: 120px; }
+        .bar-group { flex: 1; display: flex; gap: 2px; align-items: flex-end; position: relative; }
+        .bar { width: 16px; border-radius: 3px 3px 0 0; cursor: pointer; }
         .bar.orange { background: var(--orange); }
         .bar.green { background: var(--green); }
-        .bar-vals { position: absolute; top: -35px; left: 0; right: 0; text-align: center; font-size: 0.65rem; font-weight: 600; line-height: 1.3; }
-        .bar-lbl { position: absolute; bottom: -20px; left: 0; right: 0; text-align: center; font-size: 0.7rem; color: var(--text-muted); }
-        .legend { display: flex; justify-content: center; gap: 20px; margin-top: 25px; font-size: 0.75rem; }
-        .leg { display: flex; align-items: center; gap: 5px; }
-        .dot { width: 10px; height: 10px; border-radius: 2px; }
-        .dot.orange { background: var(--orange); }
-        .dot.green { background: var(--green); }
+        .bar-vals { position: absolute; top: -30px; left: 0; right: 0; text-align: center; font-size: 0.6rem; font-weight: 600; line-height: 1.2; }
+        .bar-lbl { position: absolute; bottom: -18px; left: 0; right: 0; text-align: center; font-size: 0.65rem; color: var(--text-muted); }
+        .legend { display: flex; justify-content: center; gap: 15px; margin-top: 22px; font-size: 0.7rem; }
+        .leg { display: flex; align-items: center; gap: 4px; }
+        .dot { width: 8px; height: 8px; border-radius: 2px; }
         
-        .podium { display: flex; justify-content: center; gap: 15px; padding: 25px 0; align-items: flex-end; }
+        .podium { display: flex; justify-content: center; gap: 12px; padding: 20px 0; align-items: flex-end; }
         .place { text-align: center; }
         .avatar {
-            width: 55px; height: 55px; border-radius: 50%; background: var(--bg-card);
+            width: 50px; height: 50px; border-radius: 50%; background: var(--bg-card);
             display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 1.1rem; margin: 0 auto 6px; border: 3px solid;
+            font-weight: 700; font-size: 1rem; margin: 0 auto 5px; border: 3px solid;
         }
-        .place.p1 .avatar { width: 70px; height: 70px; border-color: var(--gold); box-shadow: 0 0 15px rgba(255,215,0,0.4); }
+        .place.p1 .avatar { width: 65px; height: 65px; border-color: var(--gold); box-shadow: 0 0 12px rgba(255,215,0,0.4); }
         .place.p2 .avatar { border-color: var(--silver); }
         .place.p3 .avatar { border-color: var(--bronze); }
-        .place .name { font-weight: 700; font-size: 0.9rem; }
-        .place .nums { font-size: 0.85rem; margin-top: 3px; }
+        .place .name { font-weight: 700; font-size: 0.85rem; }
+        .place .nums { font-size: 0.8rem; margin-top: 2px; }
         .place .nums .s { color: var(--orange); }
         .place .nums .g { color: var(--green); }
-        .medal { font-size: 1.3rem; margin-bottom: 4px; }
-        .stand { width: 70px; border-radius: 6px 6px 0 0; margin-top: 8px; }
-        .place.p1 .stand { background: rgba(255,215,0,0.2); height: 80px; }
-        .place.p2 .stand { background: rgba(192,192,192,0.2); height: 55px; }
-        .place.p3 .stand { background: rgba(205,127,50,0.2); height: 35px; }
+        .medal { font-size: 1.2rem; margin-bottom: 3px; }
+        .stand { width: 60px; border-radius: 5px 5px 0 0; margin-top: 6px; }
+        .place.p1 .stand { background: rgba(255,215,0,0.2); height: 70px; }
+        .place.p2 .stand { background: rgba(192,192,192,0.2); height: 50px; }
+        .place.p3 .stand { background: rgba(205,127,50,0.2); height: 30px; }
         
-        .board { background: var(--bg-card); border-radius: 14px; overflow: hidden; margin-top: 15px; }
-        .row { display: grid; grid-template-columns: 45px 1fr 65px 65px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .board { background: var(--bg-card); border-radius: 12px; overflow: hidden; margin-top: 12px; }
+        .row { display: grid; grid-template-columns: 40px 1fr 55px 55px; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .row:hover { background: rgba(0,200,83,0.08); }
-        .row.hdr { background: rgba(0,0,0,0.3); font-weight: 600; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; }
-        .rank { font-weight: 700; }
-        .info { display: flex; align-items: center; gap: 8px; }
+        .row.hdr { background: rgba(0,0,0,0.3); font-weight: 600; color: var(--text-muted); font-size: 0.65rem; text-transform: uppercase; }
+        .rank { font-weight: 700; font-size: 0.9rem; }
+        .info { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
         .sm-av {
-            width: 32px; height: 32px; border-radius: 50%;
+            width: 28px; height: 28px; border-radius: 50%;
             background: linear-gradient(135deg, #0066CC, #004494);
             display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 0.7rem;
+            font-weight: 700; font-size: 0.65rem;
         }
-        .col { text-align: center; font-weight: 700; }
+        .col { text-align: center; font-weight: 700; font-size: 0.9rem; }
         .col.orange { color: var(--orange); }
         .col.green { color: var(--green); }
         
-        .footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.75rem; }
+        .footer { text-align: center; padding: 18px; color: var(--text-muted); font-size: 0.7rem; }
         
         @media (max-width: 600px) {
             .stats { grid-template-columns: repeat(2, 1fr); }
@@ -113,25 +123,23 @@
     <div class="container">
         <header class="header">
             <h1>👑 King of COR</h1>
-            <p>Signed & Green Confirmed</p>
+            <p>COR Cases Dashboard</p>
         </header>
         
+        <div class="section-title">👤 Intaker Performance</div>
         <div class="stats">
-            <div class="stat">
-                <div class="num orange" id="sSigned">2,073</div>
-                <div class="lbl">Signed</div>
-            </div>
-            <div class="stat">
-                <div class="num green" id="sGreen">953</div>
-                <div class="lbl">Green Confirmed</div>
-            </div>
-            <div class="stat">
-                <div class="num" style="color:#5af" id="sRate">46%</div>
-                <div class="lbl">Confirm Rate</div>
-            </div>
-            <div class="stat">
-                <div class="num" id="sCount">31</div>
-                <div class="lbl">Intakers</div>
+            <div class="stat"><div class="num orange" id="sSigned">2,073</div><div class="lbl">Signed</div></div>
+            <div class="stat"><div class="num green" id="sGreen">953</div><div class="lbl">Green</div></div>
+            <div class="stat"><div class="num" style="color:#5af" id="sRate">46%</div><div class="lbl">Rate</div></div>
+            <div class="stat"><div class="num" id="sCount">31</div><div class="lbl">Intakers</div></div>
+        </div>
+        
+        <div class="ref-box">
+            <h3>⚖️ Attorney Referrals to COR</h3>
+            <div class="ref-stats">
+                <div class="ref-stat"><div class="n s" id="rSigned">1,309</div><div class="l">Signed</div></div>
+                <div class="ref-stat"><div class="n g" id="rGreen">562</div><div class="l">Green</div></div>
+                <div class="ref-stat"><div class="n" style="color:#5af" id="rRate">43%</div><div class="l">Rate</div></div>
             </div>
         </div>
         
@@ -141,41 +149,38 @@
         </div>
         
         <div class="chart">
-            <h3>📈 Monthly Trend</h3>
+            <h3>📈 Monthly (Intakers)</h3>
             <div class="bars" id="bars"></div>
             <div class="legend">
-                <div class="leg"><div class="dot orange"></div>Signed</div>
-                <div class="leg"><div class="dot green"></div>Green</div>
+                <div class="leg"><div class="dot" style="background:var(--orange)"></div>Signed</div>
+                <div class="leg"><div class="dot" style="background:var(--green)"></div>Green</div>
             </div>
         </div>
         
         <div class="podium" id="podium"></div>
         
         <div class="board" id="board">
-            <div class="row hdr">
-                <div>#</div>
-                <div>Intaker</div>
-                <div>Signed</div>
-                <div>Green</div>
-            </div>
+            <div class="row hdr"><div>#</div><div>Intaker</div><div>Signed</div><div>Green</div></div>
         </div>
         
-        <footer class="footer">Updated May 10, 04:32 PM</footer>
+        <footer class="footer">Updated May 10, 05:07 PM</footer>
     </div>
     
     <script>
         const ytdData = [{"rank": 1, "name": "nelsonr", "signed": 216, "green": 115, "initials": "NR"}, {"rank": 2, "name": "jcuarezma", "signed": 191, "green": 94, "initials": "JA"}, {"rank": 3, "name": "mpenaranda", "signed": 195, "green": 90, "initials": "MA"}, {"rank": 4, "name": "oplasencia", "signed": 189, "green": 84, "initials": "OA"}, {"rank": 5, "name": "rpena", "signed": 88, "green": 54, "initials": "RA"}, {"rank": 6, "name": "jjortega", "signed": 97, "green": 54, "initials": "JA"}, {"rank": 7, "name": "lvivas", "signed": 104, "green": 45, "initials": "LS"}, {"rank": 8, "name": "lmurillo", "signed": 103, "green": 45, "initials": "LO"}, {"rank": 9, "name": "jduvergel", "signed": 125, "green": 44, "initials": "JL"}, {"rank": 10, "name": "jamgomez", "signed": 78, "green": 42, "initials": "JZ"}, {"rank": 11, "name": "mjmiranda", "signed": 70, "green": 33, "initials": "MA"}, {"rank": 12, "name": "dvelasquez", "signed": 58, "green": 30, "initials": "DZ"}, {"rank": 13, "name": "avilchez", "signed": 55, "green": 27, "initials": "AZ"}, {"rank": 14, "name": "mcardona", "signed": 54, "green": 26, "initials": "MA"}, {"rank": 15, "name": "scubillos", "signed": 57, "green": 25, "initials": "SS"}, {"rank": 16, "name": "nsilva", "signed": 56, "green": 25, "initials": "NA"}, {"rank": 17, "name": "rmartinez", "signed": 95, "green": 25, "initials": "RZ"}, {"rank": 18, "name": "jortega", "signed": 59, "green": 23, "initials": "JA"}, {"rank": 19, "name": "nrubio", "signed": 39, "green": 20, "initials": "NO"}, {"rank": 20, "name": "ramorales", "signed": 38, "green": 14, "initials": "RS"}, {"rank": 21, "name": "jramirez", "signed": 22, "green": 10, "initials": "JZ"}, {"rank": 22, "name": "jcortina", "signed": 22, "green": 10, "initials": "JA"}, {"rank": 23, "name": "djuarez", "signed": 17, "green": 8, "initials": "DZ"}, {"rank": 24, "name": "aaguirre", "signed": 9, "green": 6, "initials": "AE"}, {"rank": 25, "name": "boliva", "signed": 15, "green": 3, "initials": "BA"}, {"rank": 26, "name": "rroca", "signed": 7, "green": 1, "initials": "RA"}, {"rank": 27, "name": "dvalles", "signed": 5, "green": 0, "initials": "DS"}, {"rank": 28, "name": "jgonzalez", "signed": 2, "green": 0, "initials": "JZ"}, {"rank": 29, "name": "cprado", "signed": 1, "green": 0, "initials": "CO"}, {"rank": 30, "name": "chernandez", "signed": 5, "green": 0, "initials": "CZ"}, {"rank": 31, "name": "mquintero", "signed": 1, "green": 0, "initials": "MO"}];
         const monthlyData = {"2026-01": [{"rank": 1, "name": "nelsonr", "signed": 50, "green": 26, "initials": "NR"}, {"rank": 2, "name": "rpena", "signed": 27, "green": 17, "initials": "RA"}, {"rank": 3, "name": "mpenaranda", "signed": 33, "green": 15, "initials": "MA"}, {"rank": 4, "name": "nrubio", "signed": 20, "green": 14, "initials": "NO"}, {"rank": 5, "name": "oplasencia", "signed": 27, "green": 11, "initials": "OA"}, {"rank": 6, "name": "avilchez", "signed": 16, "green": 11, "initials": "AZ"}, {"rank": 7, "name": "jamgomez", "signed": 18, "green": 11, "initials": "JZ"}, {"rank": 8, "name": "jduvergel", "signed": 14, "green": 10, "initials": "JL"}, {"rank": 9, "name": "rmartinez", "signed": 20, "green": 9, "initials": "RZ"}, {"rank": 10, "name": "jcuarezma", "signed": 14, "green": 9, "initials": "JA"}, {"rank": 11, "name": "dvelasquez", "signed": 10, "green": 7, "initials": "DZ"}, {"rank": 12, "name": "jjortega", "signed": 16, "green": 7, "initials": "JA"}, {"rank": 13, "name": "lvivas", "signed": 14, "green": 7, "initials": "LS"}, {"rank": 14, "name": "mjmiranda", "signed": 10, "green": 6, "initials": "MA"}, {"rank": 15, "name": "nsilva", "signed": 10, "green": 6, "initials": "NA"}, {"rank": 16, "name": "aaguirre", "signed": 6, "green": 5, "initials": "AE"}, {"rank": 17, "name": "jcortina", "signed": 13, "green": 5, "initials": "JA"}, {"rank": 18, "name": "jortega", "signed": 9, "green": 5, "initials": "JA"}, {"rank": 19, "name": "lmurillo", "signed": 13, "green": 5, "initials": "LO"}, {"rank": 20, "name": "mcardona", "signed": 7, "green": 5, "initials": "MA"}, {"rank": 21, "name": "ramorales", "signed": 18, "green": 4, "initials": "RS"}, {"rank": 22, "name": "scubillos", "signed": 7, "green": 1, "initials": "SS"}, {"rank": 23, "name": "mquintero", "signed": 1, "green": 0, "initials": "MO"}], "2026-02": [{"rank": 1, "name": "oplasencia", "signed": 31, "green": 22, "initials": "OA"}, {"rank": 2, "name": "jcuarezma", "signed": 46, "green": 22, "initials": "JA"}, {"rank": 3, "name": "mpenaranda", "signed": 29, "green": 19, "initials": "MA"}, {"rank": 4, "name": "nelsonr", "signed": 43, "green": 19, "initials": "NR"}, {"rank": 5, "name": "jduvergel", "signed": 33, "green": 15, "initials": "JL"}, {"rank": 6, "name": "lvivas", "signed": 25, "green": 11, "initials": "LS"}, {"rank": 7, "name": "rpena", "signed": 12, "green": 10, "initials": "RA"}, {"rank": 8, "name": "jamgomez", "signed": 14, "green": 9, "initials": "JZ"}, {"rank": 9, "name": "dvelasquez", "signed": 15, "green": 9, "initials": "DZ"}, {"rank": 10, "name": "jjortega", "signed": 13, "green": 7, "initials": "JA"}, {"rank": 11, "name": "rmartinez", "signed": 15, "green": 7, "initials": "RZ"}, {"rank": 12, "name": "nrubio", "signed": 19, "green": 6, "initials": "NO"}, {"rank": 13, "name": "lmurillo", "signed": 17, "green": 6, "initials": "LO"}, {"rank": 14, "name": "mcardona", "signed": 17, "green": 5, "initials": "MA"}, {"rank": 15, "name": "jortega", "signed": 8, "green": 5, "initials": "JA"}, {"rank": 16, "name": "jcortina", "signed": 9, "green": 5, "initials": "JA"}, {"rank": 17, "name": "scubillos", "signed": 10, "green": 4, "initials": "SS"}, {"rank": 18, "name": "ramorales", "signed": 13, "green": 4, "initials": "RS"}, {"rank": 19, "name": "mjmiranda", "signed": 13, "green": 3, "initials": "MA"}, {"rank": 20, "name": "avilchez", "signed": 6, "green": 2, "initials": "AZ"}, {"rank": 21, "name": "nsilva", "signed": 2, "green": 2, "initials": "NA"}, {"rank": 22, "name": "aaguirre", "signed": 3, "green": 1, "initials": "AE"}], "2026-03": [{"rank": 1, "name": "jcuarezma", "signed": 64, "green": 49, "initials": "JA"}, {"rank": 2, "name": "nelsonr", "signed": 69, "green": 45, "initials": "NR"}, {"rank": 3, "name": "oplasencia", "signed": 49, "green": 30, "initials": "OA"}, {"rank": 4, "name": "mpenaranda", "signed": 34, "green": 27, "initials": "MA"}, {"rank": 5, "name": "lmurillo", "signed": 36, "green": 24, "initials": "LO"}, {"rank": 6, "name": "rpena", "signed": 29, "green": 20, "initials": "RA"}, {"rank": 7, "name": "jjortega", "signed": 23, "green": 18, "initials": "JA"}, {"rank": 8, "name": "mjmiranda", "signed": 25, "green": 18, "initials": "MA"}, {"rank": 9, "name": "lvivas", "signed": 33, "green": 16, "initials": "LS"}, {"rank": 10, "name": "jamgomez", "signed": 20, "green": 14, "initials": "JZ"}, {"rank": 11, "name": "jortega", "signed": 20, "green": 12, "initials": "JA"}, {"rank": 12, "name": "avilchez", "signed": 17, "green": 10, "initials": "AZ"}, {"rank": 13, "name": "mcardona", "signed": 15, "green": 10, "initials": "MA"}, {"rank": 14, "name": "nsilva", "signed": 15, "green": 9, "initials": "NA"}, {"rank": 15, "name": "dvelasquez", "signed": 19, "green": 8, "initials": "DZ"}, {"rank": 16, "name": "scubillos", "signed": 10, "green": 8, "initials": "SS"}, {"rank": 17, "name": "ramorales", "signed": 7, "green": 6, "initials": "RS"}, {"rank": 18, "name": "rmartinez", "signed": 14, "green": 5, "initials": "RZ"}, {"rank": 19, "name": "jramirez", "signed": 6, "green": 5, "initials": "JZ"}, {"rank": 20, "name": "jduvergel", "signed": 16, "green": 3, "initials": "JL"}], "2026-04": [{"rank": 1, "name": "mpenaranda", "signed": 79, "green": 29, "initials": "MA"}, {"rank": 2, "name": "nelsonr", "signed": 52, "green": 25, "initials": "NR"}, {"rank": 3, "name": "oplasencia", "signed": 61, "green": 21, "initials": "OA"}, {"rank": 4, "name": "jjortega", "signed": 34, "green": 20, "initials": "JA"}, {"rank": 5, "name": "jduvergel", "signed": 53, "green": 16, "initials": "JL"}, {"rank": 6, "name": "jcuarezma", "signed": 53, "green": 14, "initials": "JA"}, {"rank": 7, "name": "scubillos", "signed": 24, "green": 12, "initials": "SS"}, {"rank": 8, "name": "lvivas", "signed": 28, "green": 11, "initials": "LS"}, {"rank": 9, "name": "lmurillo", "signed": 30, "green": 9, "initials": "LO"}, {"rank": 10, "name": "jamgomez", "signed": 24, "green": 8, "initials": "JZ"}, {"rank": 11, "name": "nsilva", "signed": 21, "green": 8, "initials": "NA"}, {"rank": 12, "name": "djuarez", "signed": 15, "green": 8, "initials": "DZ"}, {"rank": 13, "name": "rpena", "signed": 15, "green": 7, "initials": "RA"}, {"rank": 14, "name": "mcardona", "signed": 11, "green": 6, "initials": "MA"}, {"rank": 15, "name": "dvelasquez", "signed": 13, "green": 6, "initials": "DZ"}, {"rank": 16, "name": "mjmiranda", "signed": 18, "green": 6, "initials": "MA"}, {"rank": 17, "name": "jramirez", "signed": 15, "green": 5, "initials": "JZ"}, {"rank": 18, "name": "rmartinez", "signed": 33, "green": 4, "initials": "RZ"}, {"rank": 19, "name": "avilchez", "signed": 15, "green": 4, "initials": "AZ"}, {"rank": 20, "name": "boliva", "signed": 14, "green": 3, "initials": "BA"}, {"rank": 21, "name": "rroca", "signed": 6, "green": 1, "initials": "RA"}, {"rank": 22, "name": "jortega", "signed": 15, "green": 1, "initials": "JA"}, {"rank": 23, "name": "chernandez", "signed": 1, "green": 0, "initials": "CZ"}, {"rank": 24, "name": "dvalles", "signed": 2, "green": 0, "initials": "DS"}], "2026-05": [{"rank": 1, "name": "jjortega", "signed": 11, "green": 2, "initials": "JA"}, {"rank": 2, "name": "lmurillo", "signed": 7, "green": 1, "initials": "LO"}, {"rank": 3, "name": "chernandez", "signed": 4, "green": 0, "initials": "CZ"}, {"rank": 4, "name": "cprado", "signed": 1, "green": 0, "initials": "CO"}, {"rank": 5, "name": "djuarez", "signed": 2, "green": 0, "initials": "DZ"}, {"rank": 6, "name": "dvalles", "signed": 3, "green": 0, "initials": "DS"}, {"rank": 7, "name": "dvelasquez", "signed": 1, "green": 0, "initials": "DZ"}, {"rank": 8, "name": "jamgomez", "signed": 2, "green": 0, "initials": "JZ"}, {"rank": 9, "name": "jcuarezma", "signed": 14, "green": 0, "initials": "JA"}, {"rank": 10, "name": "jduvergel", "signed": 9, "green": 0, "initials": "JL"}, {"rank": 11, "name": "jgonzalez", "signed": 2, "green": 0, "initials": "JZ"}, {"rank": 12, "name": "jortega", "signed": 7, "green": 0, "initials": "JA"}, {"rank": 13, "name": "jramirez", "signed": 1, "green": 0, "initials": "JZ"}, {"rank": 14, "name": "lvivas", "signed": 4, "green": 0, "initials": "LS"}, {"rank": 15, "name": "mcardona", "signed": 4, "green": 0, "initials": "MA"}, {"rank": 16, "name": "mjmiranda", "signed": 4, "green": 0, "initials": "MA"}, {"rank": 17, "name": "mpenaranda", "signed": 20, "green": 0, "initials": "MA"}, {"rank": 18, "name": "nelsonr", "signed": 2, "green": 0, "initials": "NR"}, {"rank": 19, "name": "nsilva", "signed": 8, "green": 0, "initials": "NA"}, {"rank": 20, "name": "oplasencia", "signed": 21, "green": 0, "initials": "OA"}, {"rank": 21, "name": "rmartinez", "signed": 13, "green": 0, "initials": "RZ"}, {"rank": 22, "name": "rpena", "signed": 5, "green": 0, "initials": "RA"}, {"rank": 23, "name": "rroca", "signed": 1, "green": 0, "initials": "RA"}, {"rank": 24, "name": "avilchez", "signed": 1, "green": 0, "initials": "AZ"}, {"rank": 25, "name": "scubillos", "signed": 6, "green": 0, "initials": "SS"}, {"rank": 26, "name": "boliva", "signed": 1, "green": 0, "initials": "BA"}]};
-        const chartData = [{"month": "2026-01", "label": "Jan", "signed": 373, "green": 196}, {"month": "2026-02", "label": "Feb", "signed": 393, "green": 193}, {"month": "2026-03", "label": "Mar", "signed": 521, "green": 337}, {"month": "2026-04", "label": "Apr", "signed": 632, "green": 224}, {"month": "2026-05", "label": "May", "signed": 154, "green": 3}];
+        const chartData = [{"month": "2026-01", "label": "Jan", "iSigned": 373, "iGreen": 196, "rSigned": 305, "rGreen": 164}, {"month": "2026-02", "label": "Feb", "iSigned": 393, "iGreen": 193, "rSigned": 255, "rGreen": 141}, {"month": "2026-03", "label": "Mar", "iSigned": 521, "iGreen": 337, "rSigned": 324, "rGreen": 180}, {"month": "2026-04", "label": "Apr", "iSigned": 632, "iGreen": 224, "rSigned": 321, "rGreen": 77}, {"month": "2026-05", "label": "May", "iSigned": 154, "iGreen": 3, "rSigned": 104, "rGreen": 0}];
+        const ytdRefs = {"signed": 1309, "green": 562};
+        const monthlyRefs = {"2026-01": {"signed": 305, "green": 164}, "2026-02": {"signed": 255, "green": 141}, "2026-03": {"signed": 324, "green": 180}, "2026-04": {"signed": 321, "green": 77}, "2026-05": {"signed": 104, "green": 0}};
         
         function renderChart() {
             const c = document.getElementById('bars');
-            const maxS = Math.max(...chartData.map(d => d.signed));
+            const maxS = Math.max(...chartData.map(d => d.iSigned));
             c.innerHTML = chartData.map(d => {
-                const hS = Math.max((d.signed / maxS) * 100, 5);
-                const hG = Math.max((d.green / maxS) * 100, 5);
+                const hS = Math.max((d.iSigned / maxS) * 90, 5);
+                const hG = Math.max((d.iGreen / maxS) * 90, 5);
                 return `<div class="bar-group" onclick="selectPeriod('${d.month}')">
-                    <div class="bar-vals"><span style="color:var(--orange)">${d.signed}</span><br><span style="color:var(--green)">${d.green}</span></div>
+                    <div class="bar-vals"><span style="color:var(--orange)">${d.iSigned}</span><br><span style="color:var(--green)">${d.iGreen}</span></div>
                     <div class="bar orange" style="height:${hS}px"></div>
                     <div class="bar green" style="height:${hG}px"></div>
                     <div class="bar-lbl">${d.label}</div>
@@ -188,9 +193,9 @@
             const t = data.slice(0, 3);
             if (t.length < 3) { c.innerHTML = ''; return; }
             c.innerHTML = `
-                <div class="place p2"><div class="avatar">${t[1].initials}</div><div class="medal">🥈</div><div class="name">${t[1].name}</div><div class="nums"><span class="s">${t[1].signed}</span> / <span class="g">${t[1].green}</span></div><div class="stand"></div></div>
-                <div class="place p1"><div class="avatar">${t[0].initials}</div><div class="medal">👑</div><div class="name">${t[0].name}</div><div class="nums"><span class="s">${t[0].signed}</span> / <span class="g">${t[0].green}</span></div><div class="stand"></div></div>
-                <div class="place p3"><div class="avatar">${t[2].initials}</div><div class="medal">🥉</div><div class="name">${t[2].name}</div><div class="nums"><span class="s">${t[2].signed}</span> / <span class="g">${t[2].green}</span></div><div class="stand"></div></div>
+                <div class="place p2"><div class="avatar">${t[1].initials}</div><div class="medal">🥈</div><div class="name">${t[1].name}</div><div class="nums"><span class="s">${t[1].signed}</span>/<span class="g">${t[1].green}</span></div><div class="stand"></div></div>
+                <div class="place p1"><div class="avatar">${t[0].initials}</div><div class="medal">👑</div><div class="name">${t[0].name}</div><div class="nums"><span class="s">${t[0].signed}</span>/<span class="g">${t[0].green}</span></div><div class="stand"></div></div>
+                <div class="place p3"><div class="avatar">${t[2].initials}</div><div class="medal">🥉</div><div class="name">${t[2].name}</div><div class="nums"><span class="s">${t[2].signed}</span>/<span class="g">${t[2].green}</span></div><div class="stand"></div></div>
             `;
         }
         
@@ -213,15 +218,22 @@
             document.getElementById('sCount').textContent = data.length;
         }
         
+        function updateRefs(period) {
+            const r = period === 'ytd' ? ytdRefs : (monthlyRefs[period] || {signed: 0, green: 0});
+            document.getElementById('rSigned').textContent = r.signed.toLocaleString();
+            document.getElementById('rGreen').textContent = r.green.toLocaleString();
+            document.getElementById('rRate').textContent = r.signed > 0 ? Math.round(r.green/r.signed*100) + '%' : '0%';
+        }
+        
         function selectPeriod(p) {
             document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
             document.querySelector(`[data-p="${p}"]`)?.classList.add('active');
             const data = p === 'ytd' ? ytdData : (monthlyData[p] || []);
-            renderPodium(data); renderBoard(data);
+            renderPodium(data); renderBoard(data); updateRefs(p);
         }
         
         document.querySelectorAll('.fbtn').forEach(b => b.addEventListener('click', () => selectPeriod(b.dataset.p)));
-        renderChart(); renderPodium(ytdData); renderBoard(ytdData);
+        renderChart(); renderPodium(ytdData); renderBoard(ytdData); updateRefs('ytd');
     </script>
 </body>
 </html>
