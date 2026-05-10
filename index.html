@@ -19,11 +19,7 @@
             --text-muted: #8899aa;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Poppins', sans-serif;
@@ -33,18 +29,9 @@
             overflow-x: hidden;
         }
         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
         
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 30px 0;
-            position: relative;
-        }
+        .header { text-align: center; padding: 30px 0; }
         
         .header h1 {
             font-size: 3rem;
@@ -53,14 +40,10 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
             margin-bottom: 10px;
         }
         
-        .header .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
+        .header .subtitle { font-size: 1.2rem; color: var(--text-muted); }
         
         .live-badge {
             display: inline-flex;
@@ -87,7 +70,6 @@
             50% { opacity: 0.5; transform: scale(1.2); }
         }
         
-        /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -109,17 +91,8 @@
             box-shadow: 0 10px 40px rgba(0, 102, 204, 0.3);
         }
         
-        .stat-card .number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--cor-blue);
-        }
-        
-        .stat-card .label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
+        .stat-card .number { font-size: 2.5rem; font-weight: 800; color: var(--cor-blue); }
+        .stat-card .label { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
         
         .stat-card.highlight .number {
             background: linear-gradient(135deg, var(--gold), #FFA500);
@@ -127,27 +100,9 @@
             -webkit-text-fill-color: transparent;
         }
         
-        /* Podium */
-        .podium-section {
-            margin-bottom: 40px;
-        }
-        
-        .podium {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 20px;
-            padding: 40px 0;
-        }
-        
-        .podium-place {
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .podium-place:hover {
-            transform: scale(1.05);
-        }
+        .podium { display: flex; justify-content: center; align-items: flex-end; gap: 20px; padding: 40px 0; }
+        .podium-place { text-align: center; transition: transform 0.3s; }
+        .podium-place:hover { transform: scale(1.05); }
         
         .podium-avatar {
             width: 80px;
@@ -170,25 +125,12 @@
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
         }
         
-        .podium-place.second .podium-avatar {
-            border-color: var(--silver);
-        }
+        .podium-place.second .podium-avatar { border-color: var(--silver); }
+        .podium-place.third .podium-avatar { border-color: var(--bronze); }
         
-        .podium-place.third .podium-avatar {
-            border-color: var(--bronze);
-        }
-        
-        .podium-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-        
-        .podium-cases {
-            color: var(--green);
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
+        .podium-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
+        .podium-cases { color: var(--green); font-weight: 600; font-size: 1.2rem; }
+        .rank-badge { font-size: 2rem; margin-bottom: 10px; }
         
         .podium-stand {
             width: 120px;
@@ -216,17 +158,7 @@
             height: 90px;
         }
         
-        .rank-badge {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        /* Leaderboard */
-        .leaderboard-section h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-        }
+        .leaderboard-section h2 { text-align: center; margin-bottom: 25px; font-size: 1.8rem; }
         
         .leaderboard {
             background: var(--bg-card);
@@ -244,9 +176,7 @@
             transition: background 0.3s;
         }
         
-        .leaderboard-row:hover {
-            background: rgba(0, 102, 204, 0.1);
-        }
+        .leaderboard-row:hover { background: rgba(0, 102, 204, 0.1); }
         
         .leaderboard-row.header {
             background: rgba(0,0,0,0.3);
@@ -256,20 +186,10 @@
             text-transform: uppercase;
         }
         
-        .rank {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
+        .rank { font-size: 1.2rem; font-weight: 700; }
+        .rank.top-3 { font-size: 1.5rem; }
         
-        .rank.top-3 {
-            font-size: 1.5rem;
-        }
-        
-        .intaker-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .intaker-info { display: flex; align-items: center; gap: 15px; }
         
         .intaker-avatar {
             width: 45px;
@@ -283,9 +203,7 @@
             font-size: 1rem;
         }
         
-        .intaker-name {
-            font-weight: 600;
-        }
+        .intaker-name { font-weight: 600; }
         
         .progress-bar {
             height: 8px;
@@ -301,22 +219,10 @@
             transition: width 1s ease-out;
         }
         
-        .cases-count {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--green);
-            text-align: right;
-        }
+        .cases-count { font-weight: 700; font-size: 1.2rem; color: var(--green); text-align: right; }
         
-        /* Achievements */
-        .achievements-section {
-            margin-top: 40px;
-        }
-        
-        .achievements-section h2 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+        .achievements-section { margin-top: 40px; }
+        .achievements-section h2 { text-align: center; margin-bottom: 25px; }
         
         .achievements-grid {
             display: grid;
@@ -335,50 +241,20 @@
             transition: transform 0.3s;
         }
         
-        .achievement:hover {
-            transform: scale(1.02);
-        }
+        .achievement:hover { transform: scale(1.02); }
+        .achievement-icon { font-size: 3rem; }
+        .achievement-info h3 { font-size: 1.1rem; margin-bottom: 5px; }
+        .achievement-info p { color: var(--text-muted); font-size: 0.9rem; }
         
-        .achievement-icon {
-            font-size: 3rem;
-        }
+        .footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.85rem; }
         
-        .achievement-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-        
-        .achievement-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        
-        /* Animations */
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .animate-in {
-            animation: slideIn 0.5s ease-out forwards;
-        }
+        .animate-in { animation: slideIn 0.5s ease-out forwards; }
         
-        /* Confetti effect for #1 */
-        .confetti {
-            position: fixed;
-            pointer-events: none;
-            z-index: 1000;
-        }
-        
-        /* Mobile */
         @media (max-width: 768px) {
             .header h1 { font-size: 2rem; }
             .podium { flex-direction: column; align-items: center; }
@@ -402,19 +278,19 @@
 
         <div class="stats-grid">
             <div class="stat-card highlight">
-                <div class="number" id="totalCases">953</div>
+                <div class="number">953</div>
                 <div class="label">Total Green COR Cases</div>
             </div>
             <div class="stat-card">
-                <div class="number" id="totalIntakers">15</div>
+                <div class="number">26</div>
                 <div class="label">Active Intakers</div>
             </div>
             <div class="stat-card">
-                <div class="number" id="avgCases">64</div>
+                <div class="number">37</div>
                 <div class="label">Avg Cases/Intaker</div>
             </div>
             <div class="stat-card">
-                <div class="number" id="monthlyGrowth">+12%</div>
+                <div class="number">-99%</div>
                 <div class="label">vs Last Month</div>
             </div>
         </div>
@@ -422,24 +298,24 @@
         <section class="podium-section">
             <div class="podium">
                 <div class="podium-place second">
-                    <div class="podium-avatar">JC</div>
+                    <div class="podium-avatar">JA</div>
                     <div class="rank-badge">🥈</div>
-                    <div class="podium-name" id="second-name">jcuarezma</div>
-                    <div class="podium-cases" id="second-cases">94</div>
+                    <div class="podium-name">jcuarezma</div>
+                    <div class="podium-cases">94</div>
                     <div class="podium-stand"></div>
                 </div>
                 <div class="podium-place first">
                     <div class="podium-avatar">NR</div>
                     <div class="rank-badge">👑</div>
-                    <div class="podium-name" id="first-name">nelsonr</div>
-                    <div class="podium-cases" id="first-cases">115</div>
+                    <div class="podium-name">nelsonr</div>
+                    <div class="podium-cases">115</div>
                     <div class="podium-stand"></div>
                 </div>
                 <div class="podium-place third">
-                    <div class="podium-avatar">MP</div>
+                    <div class="podium-avatar">MA</div>
                     <div class="rank-badge">🥉</div>
-                    <div class="podium-name" id="third-name">mpenaranda</div>
-                    <div class="podium-cases" id="third-cases">90</div>
+                    <div class="podium-name">mpenaranda</div>
+                    <div class="podium-cases">90</div>
                     <div class="podium-stand"></div>
                 </div>
             </div>
@@ -454,7 +330,6 @@
                     <div>Progress</div>
                     <div style="text-align:right">Cases</div>
                 </div>
-                <!-- Rows populated by JS -->
             </div>
         </section>
 
@@ -462,31 +337,31 @@
             <h2>🎖️ Achievements</h2>
             <div class="achievements-grid">
                 <div class="achievement">
-                    <div class="achievement-icon">🔥</div>
+                    <div class="achievement-icon">👑</div>
                     <div class="achievement-info">
-                        <h3>On Fire!</h3>
-                        <p id="streak-holder">nelsonr — 5 day streak</p>
-                    </div>
-                </div>
-                <div class="achievement">
-                    <div class="achievement-icon">🚀</div>
-                    <div class="achievement-info">
-                        <h3>Fastest Climber</h3>
-                        <p id="climber-holder">rpena — +12 spots this month</p>
+                        <h3>Current Leader</h3>
+                        <p>nelsonr — 115 cases</p>
                     </div>
                 </div>
                 <div class="achievement">
                     <div class="achievement-icon">💯</div>
                     <div class="achievement-info">
                         <h3>Century Club</h3>
-                        <p id="century-holder">1 member (100+ cases)</p>
+                        <p>1 member(s) with 100+ cases</p>
                     </div>
                 </div>
                 <div class="achievement">
-                    <div class="achievement-icon">⭐</div>
+                    <div class="achievement-icon">🎯</div>
                     <div class="achievement-info">
-                        <h3>Rising Star</h3>
-                        <p id="rising-holder">New intaker with fastest start</p>
+                        <h3>50+ Club</h3>
+                        <p>6 intakers crushing it</p>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">📈</div>
+                    <div class="achievement-info">
+                        <h3>Monthly Growth</h3>
+                        <p>-99% from last month</p>
                     </div>
                 </div>
             </div>
@@ -494,38 +369,17 @@
 
         <footer class="footer">
             <p>Data refreshes every 15 minutes • Powered by Vera AI</p>
-            <p id="lastUpdated">Last updated: Loading...</p>
+            <p>Last updated: May 10, 2026 at 04:01 PM</p>
         </footer>
     </div>
 
     <script>
-        // Sample data - will be replaced by live data
-        const leaderboardData = [
-            { rank: 1, name: "nelsonr", cases: 115, initials: "NR" },
-            { rank: 2, name: "jcuarezma", cases: 94, initials: "JC" },
-            { rank: 3, name: "mpenaranda", cases: 90, initials: "MP" },
-            { rank: 4, name: "oplasencia", cases: 84, initials: "OP" },
-            { rank: 5, name: "rpena", cases: 54, initials: "RP" },
-            { rank: 6, name: "jjortega", cases: 54, initials: "JO" },
-            { rank: 7, name: "lvivas", cases: 45, initials: "LV" },
-            { rank: 8, name: "lmurillo", cases: 45, initials: "LM" },
-            { rank: 9, name: "jduvergel", cases: 44, initials: "JD" },
-            { rank: 10, name: "jamgomez", cases: 42, initials: "JG" },
-            { rank: 11, name: "mjmiranda", cases: 33, initials: "MM" },
-            { rank: 12, name: "dvelasquez", cases: 30, initials: "DV" },
-            { rank: 13, name: "avilchez", cases: 27, initials: "AV" },
-            { rank: 14, name: "mcardona", cases: 26, initials: "MC" },
-            { rank: 15, name: "scubillos", cases: 25, initials: "SC" }
-        ];
-
+        const leaderboardData = [{"rank": 1, "name": "nelsonr", "cases": 115, "initials": "NR"}, {"rank": 2, "name": "jcuarezma", "cases": 94, "initials": "JA"}, {"rank": 3, "name": "mpenaranda", "cases": 90, "initials": "MA"}, {"rank": 4, "name": "oplasencia", "cases": 84, "initials": "OA"}, {"rank": 5, "name": "rpena", "cases": 54, "initials": "RA"}, {"rank": 6, "name": "jjortega", "cases": 54, "initials": "JA"}, {"rank": 7, "name": "lvivas", "cases": 45, "initials": "LS"}, {"rank": 8, "name": "lmurillo", "cases": 45, "initials": "LO"}, {"rank": 9, "name": "jduvergel", "cases": 44, "initials": "JL"}, {"rank": 10, "name": "jamgomez", "cases": 42, "initials": "JZ"}, {"rank": 11, "name": "mjmiranda", "cases": 33, "initials": "MA"}, {"rank": 12, "name": "dvelasquez", "cases": 30, "initials": "DZ"}, {"rank": 13, "name": "avilchez", "cases": 27, "initials": "AZ"}, {"rank": 14, "name": "mcardona", "cases": 26, "initials": "MA"}, {"rank": 15, "name": "scubillos", "cases": 25, "initials": "SS"}, {"rank": 16, "name": "nsilva", "cases": 25, "initials": "NA"}, {"rank": 17, "name": "rmartinez", "cases": 25, "initials": "RZ"}, {"rank": 18, "name": "jortega", "cases": 23, "initials": "JA"}, {"rank": 19, "name": "nrubio", "cases": 20, "initials": "NO"}, {"rank": 20, "name": "ramorales", "cases": 14, "initials": "RS"}];
         const maxCases = Math.max(...leaderboardData.map(d => d.cases));
 
         function renderLeaderboard() {
             const container = document.getElementById('leaderboard');
-            const header = container.querySelector('.header');
-            container.innerHTML = '';
-            container.appendChild(header);
-
+            
             leaderboardData.forEach((item, index) => {
                 const row = document.createElement('div');
                 row.className = 'leaderboard-row animate-in';
@@ -549,26 +403,7 @@
             });
         }
 
-        function updateTimestamp() {
-            const now = new Date();
-            document.getElementById('lastUpdated').textContent = 
-                `Last updated: ${now.toLocaleString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric', 
-                    hour: 'numeric', 
-                    minute: '2-digit',
-                    hour12: true 
-                })}`;
-        }
-
-        // Initialize
         renderLeaderboard();
-        updateTimestamp();
-
-        // Auto-refresh every 15 minutes
-        setInterval(() => {
-            location.reload();
-        }, 15 * 60 * 1000);
     </script>
 </body>
 </html>
